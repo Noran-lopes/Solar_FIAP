@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0B1F33" />
+  <meta name="description" content="Mockup mobile-first da landing page Solar+ para simulação de economia com energia solar." />
+  <title>Solar+ | Energia limpa, economia real</title>
+  <style>
+    :root {
+      --navy: #102A43;
+      --navy-2: #0B1F33;
+      --yellow: #FFC928;
+      --yellow-hover: #F1B900;
+      --orange: #FF8A1F;
+      --green: #1E9E63;
+      --green-dark: #0A7144;
+      --green-soft: #EAF8F1;
+      --blue-soft: #EAF4FF;
+      --yellow-soft: #FFF3C7;
+      --orange-soft: #FFE8D2;
+      --ink: #172B3A;
+      --muted: #566573;
+      --line: #D9E2EC;
+      --surface: #FFFFFF;
+      --surface-2: #F5F8FC;
+      --danger: #B42318;
+      --focus: #246BFD;
+      --shadow: 0 16px 40px rgba(16, 42, 67, .14);
+      --shadow-sm: 0 6px 18px rgba(16, 42, 67, .07);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--surface);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.high-contrast {
+      --navy: #000; --navy-2: #000;
+      --yellow: #FFEB00; --yellow-hover: #FFD900;
+      --green: #006B3C; --green-dark: #004D2B;
+      --ink: #000; --muted: #222; --line: #000;
+      --surface: #FFF; --surface-2: #FFF;
+      --blue-soft: #FFF; --green-soft: #FFF; --yellow-soft: #FFF; --orange-soft: #FFF;
+    }
+    body.large-text { font-size: 118%; }
+    a { color: inherit; }
+    button, input, select { font: inherit; }
+    button, a, input, select, summary { outline: none; }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {
+      box-shadow: 0 0 0 4px rgba(36,107,253,.35);
+      border-radius: 10px;
+    }
+    .skip-link { position: fixed; left: 16px; top: -100px; z-index: 9999; padding: 12px 16px; background: #fff; color: #000; border: 2px solid #000; }
+    .skip-link:focus { top: 16px; }
+    .container { width: min(calc(100% - 32px), var(--max)); margin-inline: auto; }
+
+    /* Barra de acessibilidade */
+    .access-bar { background: var(--navy-2); color: #fff; font-size: .86rem; }
+    .access-inner { min-height: 38px; display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
+    .access-btn { border: 1px solid rgba(255,255,255,.45); color: #fff; background: transparent; padding: 4px 10px; border-radius: 8px; cursor: pointer; }
+    .access-btn:hover, .access-btn[aria-pressed="true"] { background: rgba(255,255,255,.16); }
+
+    /* Header */
+    header { position: sticky; top: 0; z-index: 1000; background: rgba(255,255,255,.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-size: 1.35rem; font-weight: 900; color: var(--navy); letter-spacing: -.02em; }
+    .sun-logo { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg, var(--yellow), var(--orange)); color: var(--navy-2); box-shadow: 0 0 0 6px rgba(255,201,40,.2); font-size: 1.1rem; }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a:not(.btn) { text-decoration: none; font-weight: 700; font-size: .93rem; color: var(--navy); padding: 6px 2px; }
+    .nav-links a:not(.btn):hover { color: var(--green-dark); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+    .menu-btn { display: none; border: 1px solid var(--line); background: #fff; width: 46px; height: 46px; border-radius: 12px; font-size: 1.4rem; cursor: pointer; color: var(--navy); }
+
+    /* Botões */
+    .btn { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 14px; padding: 12px 22px; font-weight: 850; cursor: pointer; text-decoration: none; transition: transform .2s ease, background .2s ease, box-shadow .2s ease; text-align: center; }
+    .btn-primary { background: linear-gradient(135deg, var(--yellow), #FFB020); color: var(--navy-2); box-shadow: 0 10px 22px rgba(255,176,32,.35); }
+    .btn-primary:hover { background: var(--yellow-hover); transform: translateY(-2px); }
+    .btn-secondary { background: var(--navy); color: #fff; }
+    .btn-secondary:hover { background: #173D5D; transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.55); }
+    .btn-ghost:hover { background: rgba(255,255,255,.12); }
+    .btn-sm { min-height: 42px; padding: 8px 16px; }
+
+    /* Hero */
+    .hero {
+      overflow: hidden; position: relative; color: #fff; padding: 72px 0 84px;
+      background:
+        radial-gradient(circle at 88% 8%, rgba(255,201,40,.30), transparent 30%),
+        radial-gradient(circle at 6% 96%, rgba(30,158,99,.28), transparent 34%),
+        linear-gradient(160deg, var(--navy-2) 0%, var(--navy) 100%);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 52px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: var(--green-soft); color: var(--green-dark); font-weight: 850; font-size: .84rem; }
+    .hero .eyebrow { background: rgba(255,201,40,.16); color: var(--yellow); border: 1px solid rgba(255,201,40,.4); }
+    h1 { margin: 20px 0 18px; max-width: 760px; font-size: clamp(2.2rem, 4.6vw, 3.9rem); line-height: 1.05; letter-spacing: -.045em; color: #fff; }
+    h1 mark { background: none; color: var(--yellow); }
+    .hero .lead { max-width: 600px; color: #D8E6F0; font-size: 1.12rem; margin: 0; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .microcopy { margin: 14px 0 0; color: #B9CBD9; font-size: .88rem; }
+    .trust-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; padding: 0; list-style: none; }
+    .trust-row li { padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.18); font-weight: 750; font-size: .88rem; }
+    .trust-row li::before { content: "✓ "; color: var(--yellow); font-weight: 900; }
+
+    .hero-visual { position: relative; border-radius: 32px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.35); border: 6px solid rgba(255,255,255,.14); background: #8FD3FF; aspect-ratio: 520 / 450; }
+    .hero-visual svg { display: block; width: 100%; height: 100%; }
+    .floating-card { position: absolute; background: rgba(255,255,255,.97); border-radius: 16px; box-shadow: var(--shadow); padding: 12px 16px; color: var(--ink); }
+    .saving-card { left: 16px; top: 16px; }
+    .impact-card { right: 16px; bottom: 16px; display: flex; gap: 10px; align-items: center; }
+    .impact-card .dot { width: 38px; height: 38px; border-radius: 50%; background: var(--green-soft); display: grid; place-items: center; font-size: 1.2rem; }
+    .floating-card strong { display: block; color: var(--navy); font-size: 1.25rem; line-height: 1.15; }
+    .floating-card small { color: var(--muted); font-size: .78rem; font-weight: 700; }
+
+    /* Seções */
+    section { padding: 84px 0; }
+    .section-head { max-width: 720px; margin-bottom: 38px; }
+    .section-head h2 { margin: 12px 0 10px; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.12; letter-spacing: -.03em; color: var(--navy); }
+    .section-head p { color: var(--muted); margin: 0; font-size: 1.05rem; }
+
+    .benefits { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow-sm); transition: transform .2s, box-shadow .2s; }
+    .benefits .card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .card-icon { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 16px; font-size: 1.6rem; }
+    .benefits .card:nth-child(1) .card-icon { background: var(--yellow-soft); }
+    .benefits .card:nth-child(2) .card-icon { background: var(--blue-soft); }
+    .benefits .card:nth-child(3) .card-icon { background: var(--orange-soft); }
+    .benefits .card:nth-child(4) .card-icon { background: var(--green-soft); }
+    .card h3 { margin: 18px 0 8px; color: var(--navy); font-size: 1.15rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+    /* Simulador */
+    .simulator { background: var(--surface-2); }
+    .sim-grid { display: grid; grid-template-columns: .88fr 1.12fr; gap: 28px; align-items: stretch; }
+    .sim-info { padding: 38px; border-radius: 30px; color: #fff; position: relative; overflow: hidden;
+      background: radial-gradient(circle at 100% 0%, rgba(255,201,40,.28), transparent 40%), linear-gradient(160deg, var(--navy), var(--navy-2)); }
+    .sim-info .eyebrow { background: rgba(255,201,40,.16); color: var(--yellow); }
+    .sim-info h2 { margin: 14px 0 12px; font-size: 2.3rem; line-height: 1.1; letter-spacing: -.03em; }
+    .sim-info p { color: #D8E6F0; }
+    .check-list { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 14px; }
+    .check-list li { display: flex; gap: 12px; align-items: flex-start; }
+    .check-list li::before { content: "✓"; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--yellow); color: var(--navy-2); font-weight: 900; display: grid; place-items: center; font-size: .8rem; margin-top: 1px; }
+    .form-card { background: #fff; border-radius: 30px; padding: 32px; box-shadow: var(--shadow); border: 1px solid var(--line); }
+    .form-card h2 { margin: 0 0 4px; color: var(--navy); font-size: 1.5rem; }
+    .progress { display: flex; gap: 8px; margin-bottom: 8px; }
+    .progress span { height: 7px; flex: 1; border-radius: 999px; background: var(--line); transition: background .3s; }
+    .progress .active { background: var(--green); }
+    .step-label { font-size: .8rem; font-weight: 800; color: var(--green-dark); margin: 0 0 18px; }
+    .field { margin-bottom: 18px; }
+    label { display: block; font-weight: 800; margin-bottom: 7px; color: var(--navy); font-size: .95rem; }
+    .hint { display: block; color: var(--muted); font-size: .82rem; margin-top: 5px; }
+    input, select { width: 100%; min-height: 52px; border: 1.5px solid #B8C5D1; border-radius: 12px; padding: 0 14px; background: #fff; color: var(--ink); transition: border-color .2s, box-shadow .2s; }
+    input:hover, select:hover { border-color: #778899; }
+    input:focus, select:focus { border-color: var(--focus); box-shadow: 0 0 0 4px rgba(36,107,253,.18); }
+    input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--danger); background: #FFF6F5; }
+    .money { position: relative; }
+    .money span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-weight: 800; color: var(--muted); }
+    .money input { padding-left: 46px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-card .btn { width: 100%; }
+    .privacy { color: var(--muted); font-size: .8rem; text-align: center; margin: 12px 0 0; }
+    .error { display: none; color: var(--danger); font-size: .83rem; margin-top: 6px; font-weight: 700; }
+    .error::before { content: "⚠ "; }
+    .consent { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; font-size: .88rem; color: var(--ink); }
+    .consent input { width: 22px; min-height: 22px; height: 22px; margin-top: 2px; flex: none; accent-color: var(--green); }
+
+    .result { display: none; margin-top: 24px; padding: 22px; border-radius: 20px; background: var(--green-soft); border: 1px solid #A9DEC4; }
+    .result[aria-hidden="false"] { display: block; animation: rise .4s ease; }
+    .result h3 { margin: 0 0 14px; color: #0C6841; }
+    .metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .metric { background: #fff; padding: 14px; border-radius: 14px; border: 1px solid #CDE8D9; }
+    .metric strong { display: block; font-size: 1.3rem; color: var(--navy); letter-spacing: -.02em; }
+    .metric span { color: var(--muted); font-size: .78rem; }
+    .disclaimer { font-size: .76rem; color: var(--muted); margin: 10px 0 0; }
+    #contactStep { display: none; margin-top: 24px; padding-top: 22px; border-top: 1px dashed var(--line); animation: rise .4s ease; }
+    #contactStep.show { display: block; }
+    #contactStep h3 { margin: 0 0 4px; color: var(--navy); }
+    .success { display: none; margin-top: 24px; padding: 24px; border-radius: 20px; background: var(--green-soft); border: 1px solid #A9DEC4; text-align: center; }
+    .success.show { display: block; animation: rise .4s ease; }
+    .success .big { font-size: 2.2rem; }
+    .success h3 { margin: 6px 0; color: #0C6841; }
+    .success p { margin: 0; color: var(--muted); }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+    /* Como funciona */
+    .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; counter-reset: step; }
+    .step { position: relative; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow-sm); }
+    .step::before { counter-increment: step; content: counter(step); position: relative; z-index: 1; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg, var(--yellow), var(--orange)); color: var(--navy-2); font-weight: 900; margin-bottom: 16px; }
+    .step:not(:last-child)::after { content: ""; position: absolute; top: 46px; left: 82px; right: -20px; border-top: 2px dashed #E3C25A; }
+    .step h3 { margin: 0 0 6px; color: var(--navy); }
+    .step p { margin: 0; color: var(--muted); font-size: .93rem; }
+
+    /* Prova social */
+    .proof { background: linear-gradient(180deg,#fff,#F3F8FD); }
+    .proof-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 24px; }
+    .quote-card { position: relative; padding: 34px; }
+    .quote-card::before { content: "“"; position: absolute; right: 26px; top: -6px; font-size: 8rem; line-height: 1; color: var(--yellow); opacity: .55; font-family: Georgia, serif; }
+    .quote { font-size: 1.22rem; color: var(--navy); font-weight: 700; line-height: 1.5; margin: 0; position: relative; }
+    .stars { color: #F2A900; letter-spacing: 3px; margin-bottom: 12px; font-size: 1.1rem; }
+    .person { margin-top: 20px; color: var(--muted); font-size: .92rem; }
+    .trust-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .trust-stat { padding: 22px; border-radius: 20px; background: linear-gradient(160deg, var(--navy), var(--navy-2)); color: #fff; display: flex; flex-direction: column; justify-content: center; }
+    .trust-stat strong { display: block; font-size: 1.9rem; color: var(--yellow); letter-spacing: -.02em; }
+    .trust-stat span { font-size: .86rem; color: #D8E6F0; }
+
+    /* FAQ */
+    .faq-list { display: grid; gap: 12px; max-width: 900px; }
+    details { border: 1px solid var(--line); border-radius: 16px; background: #fff; padding: 0 22px; box-shadow: var(--shadow-sm); }
+    details[open] { border-color: #E3C25A; }
+    summary { padding: 20px 0; cursor: pointer; font-weight: 850; color: var(--navy); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--yellow-soft); display: grid; place-items: center; font-size: 1.2rem; font-weight: 900; transition: transform .2s; }
+    details[open] summary::after { content: "–"; background: var(--yellow); }
+    details p { color: var(--muted); margin: 0 0 20px; }
+
+    /* CTA final */
+    .final-cta { padding-top: 10px; }
+    .cta-box { padding: 46px; border-radius: 32px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 24px;
+      background: radial-gradient(circle at 100% 0%, rgba(255,201,40,.35), transparent 45%), linear-gradient(135deg, var(--navy), var(--navy-2)); }
+    .cta-box h2 { margin: 0 0 8px; font-size: 2rem; letter-spacing: -.02em; }
+    .cta-box p { margin: 0; color: #D8E6F0; }
+
+    footer { margin-top: 84px; background: var(--navy-2); color: #D8E6F0; padding: 52px 0 96px; }
+    .footer-grid { display: grid; grid-template-columns: 1.3fr repeat(2,1fr); gap: 30px; }
+    footer h3 { color: #fff; font-size: 1rem; }
+    footer a:not(.logo) { color: #D8E6F0; text-decoration: none; display: block; margin: 9px 0; }
+    footer a:not(.logo):hover { color: var(--yellow); }
+    .badge-ods { display: inline-block; margin-top: 6px; padding: 6px 12px; border-radius: 8px; background: #FFC928; color: #0B1F33; font-weight: 900; font-size: .82rem; }
+    .legal { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.14); padding-top: 18px; font-size: .8rem; color: #9FB3C4; }
+
+    .whatsapp { position: fixed; z-index: 900; right: 20px; bottom: 20px; min-width: 58px; min-height: 58px; border-radius: 999px; background: #159B57; color: #fff; border: 3px solid #fff; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 20px; text-decoration: none; font-weight: 900; }
+    .whatsapp:hover { background: #0F8548; }
+    .toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%,120px); opacity: 0; background: #0B1F33; color: #fff; padding: 13px 18px; border-radius: 12px; z-index: 2000; transition: .25s; box-shadow: var(--shadow); }
+    .toast.show { transform: translate(-50%,0); opacity: 1; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; position: absolute; left: 16px; right: 16px; top: 72px; flex-direction: column; align-items: stretch; background: #fff; padding: 18px; border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); gap: 10px; }
+      .nav-links.open { display: flex; }
+      .menu-btn { display: block; }
+      .hero-grid, .sim-grid, .proof-grid { grid-template-columns: 1fr; }
+      .benefits, .steps { grid-template-columns: 1fr 1fr; }
+      .step::after { display: none !important; }
+    }
+
+    @media (max-width: 600px) {
+      .container { width: min(calc(100% - 24px), var(--max)); }
+      .access-inner { justify-content: center; }
+      .access-label { display: none; }
+      .nav { height: 64px; }
+      .nav-links { top: 64px; }
+      .hero { padding: 40px 0 52px; }
+      h1 { font-size: 2.3rem; }
+      .hero .lead { font-size: 1rem; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; }
+      .hero-visual { border-width: 4px; border-radius: 24px; }
+      .saving-card { left: 10px; top: 10px; padding: 8px 12px; }
+      .impact-card { right: 10px; bottom: 10px; padding: 8px 12px; }
+      section { padding: 56px 0; }
+      .benefits, .steps, .metrics, .footer-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .sim-info, .form-card { padding: 24px; }
+      .sim-info h2 { font-size: 1.9rem; }
+      .cta-box { padding: 30px 22px; align-items: stretch; flex-direction: column; }
+      .cta-box .btn { width: 100%; }
+      .whatsapp { width: 58px; padding: 0; }
+      .whatsapp span { display: none; }
+      .quote-card { padding: 26px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo principal</a>
+
+  <div class="access-bar" aria-label="Ferramentas de acessibilidade">
+    <div class="container access-inner">
+      <span class="access-label">Acessibilidade:</span>
+      <button class="access-btn" id="increaseText" type="button" aria-label="Aumentar tamanho do texto">A+</button>
+      <button class="access-btn" id="normalText" type="button" aria-label="Restaurar tamanho do texto">A</button>
+      <button class="access-btn" id="contrast" type="button" aria-pressed="false">◐ Alto contraste</button>
+    </div>
+  </div>
+
+  <header>
+    <nav class="container nav" aria-label="Navegação principal">
+      <a class="logo" href="#inicio" aria-label="Solar+, página inicial"><span class="sun-logo" aria-hidden="true">☀</span> Solar+</a>
+      <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#beneficios">Benefícios</a>
+        <a href="#simulador">Simulador</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#faq">Dúvidas</a>
+        <a class="btn btn-primary btn-sm" href="#simulador">Simular economia</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">✓ Análise inicial gratuita e sem compromisso</span>
+          <h1>Economia na conta de luz com <mark>segurança e previsibilidade.</mark></h1>
+          <p class="lead">Descubra quanto sua casa, condomínio ou empresa pode economizar com uma solução solar personalizada, explicada de forma simples e acompanhada do início ao pós-venda.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#simulador">Simular minha economia →</a>
+            <a class="btn btn-ghost" href="#como-funciona">Entender como funciona</a>
+          </div>
+          <p class="microcopy">Leva menos de 1 minuto. Você verá uma estimativa antes de falar com um especialista.</p>
+          <ul class="trust-row" aria-label="Diferenciais da Solar+">
+            <li>Proposta transparente</li>
+            <li>Suporte especializado</li>
+            <li>Jornada 100% digital</li>
+          </ul>
+        </div>
+
+        <div class="hero-visual" role="img" aria-label="Ilustração de uma residência com placas solares no telhado sob o sol">
+          <svg viewBox="0 0 520 450" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7CCBFF"/><stop offset="1" stop-color="#E6F6FF"/></linearGradient>
+              <linearGradient id="pv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1A6FA3"/><stop offset="1" stop-color="#0F3F63"/></linearGradient>
+              <radialGradient id="sunGlow"><stop offset="0" stop-color="#FFE27A" stop-opacity=".9"/><stop offset="1" stop-color="#FFE27A" stop-opacity="0"/></radialGradient>
+            </defs>
+            <rect width="520" height="450" fill="url(#sky)"/>
+            <circle cx="420" cy="96" r="120" fill="url(#sunGlow)"/>
+            <g stroke="#FFC928" stroke-width="5" stroke-linecap="round">
+              <line x1="420" y1="30" x2="420" y2="44"/><line x1="420" y1="148" x2="420" y2="162"/>
+              <line x1="354" y1="96" x2="368" y2="96"/><line x1="472" y1="96" x2="486" y2="96"/>
+              <line x1="373" y1="49" x2="383" y2="59"/><line x1="457" y1="133" x2="467" y2="143"/>
+              <line x1="467" y1="49" x2="457" y2="59"/><line x1="383" y1="133" x2="373" y2="143"/>
+            </g>
+            <circle cx="420" cy="96" r="42" fill="#FFC928"/>
+            <g fill="#fff" opacity=".9">
+              <ellipse cx="110" cy="92" rx="46" ry="15"/><ellipse cx="140" cy="80" rx="30" ry="14"/>
+              <ellipse cx="270" cy="150" rx="40" ry="12"/><ellipse cx="294" cy="140" rx="24" ry="11"/>
+            </g>
+            <path d="M0 340 Q130 290 260 330 T520 310 V450 H0Z" fill="#9ED88C"/>
+            <path d="M0 380 Q160 340 300 375 T520 360 V450 H0Z" fill="#6DBB6A"/>
+            <!-- casa -->
+            <rect x="120" y="236" width="300" height="150" rx="6" fill="#F7F2EA"/>
+            <polygon points="90,236 135,176 385,176 430,236" fill="#2F4A63"/>
+            <polygon points="139.0,184 184.2,184 175.2,204 124.0,204" fill="url(#pv)" stroke="#7FC3E8" stroke-width="1"/>
+<polygon points="188.2,184 233.4,184 230.4,204 179.2,204" fill="url(#pv)" stroke="#7FC3E8" stroke-width="1"/>
+<polygon points="237.4,184 282.6,184 285.6,204 234.4,204" fill="url(#pv)" stroke="#7FC3E8" stroke-width="1"/>
+<polygon points="286.6,184 331.8,184 340.8,204 289.6,204" fill="url(#pv)" stroke="#7FC3E8" stroke-width="1"/>
+<polygon points="335.8,184 381.0,184 396.0,204 344.8,204" fill="url(#pv)" stroke="#7FC3E8" stroke-width="1"/>
+<polygon points="121.0,208 173.4,208 164.4,228 106.0,228" fill="url(#pv)" stroke="#7FC3E8" stroke-width="1"/>
+<polygon points="177.4,208 229.8,208 226.8,228 168.4,228" fill="url(#pv)" stroke="#7FC3E8" stroke-width="1"/>
+<polygon points="233.8,208 286.2,208 289.2,228 230.8,228" fill="url(#pv)" stroke="#7FC3E8" stroke-width="1"/>
+<polygon points="290.2,208 342.6,208 351.6,228 293.2,228" fill="url(#pv)" stroke="#7FC3E8" stroke-width="1"/>
+<polygon points="346.6,208 399.0,208 414.0,228 355.6,228" fill="url(#pv)" stroke="#7FC3E8" stroke-width="1"/>
+            <rect x="150" y="290" width="62" height="96" rx="4" fill="#B06F48"/>
+            <circle cx="198" cy="340" r="3.5" fill="#FFC928"/>
+            <rect x="262" y="270" width="110" height="68" rx="4" fill="#BDE9FF" stroke="#fff" stroke-width="6"/>
+            <line x1="317" y1="270" x2="317" y2="338" stroke="#fff" stroke-width="4"/>
+            <rect x="100" y="386" width="340" height="8" rx="4" fill="#4E8B4B" opacity=".5"/>
+            <!-- árvore -->
+            <rect x="468" y="320" width="8" height="64" fill="#7A5230"/>
+            <circle cx="472" cy="306" r="30" fill="#2E9A5B"/><circle cx="456" cy="322" r="20" fill="#3BB06C"/>
+          </svg>
+          <div class="floating-card saving-card"><small>Economia potencial</small><strong>até 90%*</strong></div>
+          <div class="floating-card impact-card"><span class="dot" aria-hidden="true">🌱</span><div><small>Energia limpa</small><strong>ODS 7</strong></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Valor para o cliente</span>
+          <h2>Por que escolher a Solar+?</h2>
+          <p>Uma experiência desenhada para reduzir dúvidas, facilitar decisões e acompanhar cada etapa do projeto.</p>
+        </div>
+        <div class="benefits">
+          <article class="card"><div class="card-icon" aria-hidden="true">💰</div><h3>Economia real</h3><p>Estimativa personalizada com projeções mensais e anuais de economia.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">🔎</div><h3>Transparência</h3><p>Custos, etapas e prazos apresentados em uma proposta clara, sem linguagem excessivamente técnica.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">🛡️</div><h3>Decisão segura</h3><p>Especialistas disponíveis para esclarecer retorno, instalação, garantias e manutenção.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">🌱</div><h3>Impacto positivo</h3><p>Energia renovável, redução de emissões e contribuição prática para a ODS 7.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="simulator" id="simulador">
+      <div class="container sim-grid">
+        <div class="sim-info">
+          <span class="eyebrow">Simulador Solar+</span>
+          <h2>Veja uma estimativa da sua economia.</h2>
+          <p>Informe apenas os dados essenciais. O resultado é imediato e pode ser refinado por um especialista depois.</p>
+          <ul class="check-list">
+            <li>Formulário curto, pensado para smartphones</li>
+            <li>Resposta imediata e fácil de entender</li>
+            <li>Opção de seguir pelo WhatsApp ou e-mail</li>
+            <li>Atendimento humano sempre disponível</li>
+          </ul>
+        </div>
+
+        <form class="form-card" id="solarForm" novalidate aria-labelledby="formTitle">
+          <div class="progress" id="progress" aria-label="Etapa 1 de 2"><span class="active"></span><span></span></div>
+          <p class="step-label" id="stepLabel">Etapa 1 de 2 · Simulação</p>
+          <h2 id="formTitle">Calcule sua economia</h2>
+          <p class="hint" style="margin-bottom:22px">Os campos marcados com * são obrigatórios.</p>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="property">Tipo de imóvel *</label>
+              <select id="property" required aria-describedby="propertyError">
+                <option value="">Selecione</option>
+                <option>Casa</option><option>Condomínio</option><option>Comércio</option><option>Empresa</option>
+              </select>
+              <span class="error" id="propertyError">Selecione o tipo de imóvel.</span>
+            </div>
+            <div class="field">
+              <label for="city">Cidade *</label>
+              <input id="city" type="text" autocomplete="address-level2" placeholder="Ex.: São Paulo" required aria-describedby="cityError" />
+              <span class="error" id="cityError">Informe sua cidade.</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="bill">Valor médio da conta de energia *</label>
+            <div class="money"><span aria-hidden="true">R$</span><input id="bill" type="number" min="100" step="10" inputmode="decimal" placeholder="450" aria-describedby="billHint billError" required /></div>
+            <span class="hint" id="billHint">Digite apenas o valor em reais, sem pontos ou vírgulas.</span>
+            <span class="error" id="billError">Informe um valor igual ou superior a R$ 100.</span>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Calcular minha economia</button>
+          <p class="privacy">🔒 Seus dados são protegidos e não serão compartilhados sem autorização.</p>
+
+          <div class="result" id="result" aria-live="polite" aria-hidden="true">
+            <h3>✅ Sua estimativa está pronta</h3>
+            <div class="metrics">
+              <div class="metric"><strong id="monthlySaving">R$ 0</strong><span>economia mensal estimada</span></div>
+              <div class="metric"><strong id="annualSaving">R$ 0</strong><span>economia anual estimada</span></div>
+              <div class="metric"><strong id="fiveYearSaving">R$ 0</strong><span>projeção em 5 anos</span></div>
+            </div>
+            <p class="disclaimer">*Simulação acadêmica. A economia efetiva varia conforme consumo, localização, condições do imóvel e projeto técnico.</p>
+            <button class="btn btn-secondary" id="proposalBtn" type="button" style="margin-top:14px">Receber proposta personalizada</button>
+          </div>
+
+          <div id="contactStep" aria-live="polite">
+            <h3>Como prefere ser contactado?</h3>
+            <p class="hint" style="margin-bottom:18px">Um especialista da Solar+ valida sua simulação sem compromisso.</p>
+            <div class="form-row">
+              <div class="field">
+                <label for="name">Nome *</label>
+                <input id="name" type="text" autocomplete="name" placeholder="Seu nome" aria-describedby="nameError" />
+                <span class="error" id="nameError">Informe seu nome.</span>
+              </div>
+              <div class="field">
+                <label for="phone">WhatsApp *</label>
+                <input id="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(11) 91234-5678" aria-describedby="phoneError" />
+                <span class="error" id="phoneError">Informe um número com DDD.</span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="email">E-mail <small style="font-weight:500">(opcional)</small></label>
+                <input id="email" type="email" autocomplete="email" placeholder="voce@email.com" />
+              </div>
+              <div class="field">
+                <label for="channel">Canal preferido</label>
+                <select id="channel"><option>WhatsApp</option><option>E-mail</option><option>Ligação</option></select>
+              </div>
+            </div>
+            <div class="field">
+              <label class="consent" for="consent"><input id="consent" type="checkbox" aria-describedby="consentError" /> <span>Concordo em receber contato da Solar+ sobre esta simulação.</span></label>
+              <span class="error" id="consentError">Para continuar, aceite o contato da Solar+.</span>
+            </div>
+            <button class="btn btn-primary" id="sendBtn" type="button">Enviar e falar com especialista</button>
+          </div>
+
+          <div class="success" id="success" role="status" aria-live="polite">
+            <div class="big" aria-hidden="true">🎉</div>
+            <h3>Pedido recebido!</h3>
+            <p>Um especialista retorna em até 24h pelo canal escolhido. Seu histórico fica registrado para você não repetir informações.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="como-funciona">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Jornada simplificada</span><h2>Energia solar sem complicação.</h2><p>Cada etapa informa o que está acontecendo, o que o cliente precisa fazer e qual será o próximo passo.</p></div>
+        <div class="steps">
+          <article class="step"><h3>Simulação</h3><p>Você recebe uma estimativa inicial de economia em menos de um minuto.</p></article>
+          <article class="step"><h3>Análise</h3><p>Um especialista valida consumo, imóvel e viabilidade do projeto.</p></article>
+          <article class="step"><h3>Proposta</h3><p>Custos, retorno, etapas e prazos são apresentados com transparência.</p></article>
+          <article class="step"><h3>Instalação e suporte</h3><p>Acompanhamento da implantação ao pós-venda, com histórico registrado no CRM.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" aria-labelledby="proofTitle">
+      <div class="container proof-grid">
+        <article class="card quote-card">
+          <div class="stars" role="img" aria-label="5 de 5 estrelas">★★★★★</div>
+          <h2 id="proofTitle" class="quote">Conseguimos entender o investimento, o prazo de retorno e cada etapa antes de decidir. O acompanhamento tornou o processo muito mais seguro.</h2>
+          <p class="person"><strong>Cliente Solar+</strong><br />Depoimento ilustrativo para o mockup acadêmico.</p>
+        </article>
+        <div class="trust-panel" aria-label="Indicadores de confiança ilustrativos">
+          <div class="trust-stat"><strong>1 min</strong><span>para a simulação inicial</span></div>
+          <div class="trust-stat"><strong>24h</strong><span>para retorno comercial</span></div>
+          <div class="trust-stat"><strong>100%</strong><span>jornada acompanhada</span></div>
+          <div class="trust-stat"><strong>ODS 7</strong><span>energia limpa e acessível</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head"><span class="eyebrow">Dúvidas frequentes</span><h2>Informação clara antes da decisão.</h2><p>Respostas diretas para as principais barreiras identificadas na jornada do cliente.</p></div>
+        <div class="faq-list">
+          <details open><summary>Quanto custa instalar energia solar?</summary><p>O investimento depende do consumo, do tipo de imóvel e da estrutura disponível. A Solar+ apresenta uma proposta personalizada com custos, economia estimada e prazo de retorno.</p></details>
+          <details><summary>Em quanto tempo o investimento retorna?</summary><p>O prazo varia conforme o projeto e o perfil de consumo. A simulação ajuda a construir uma estimativa inicial, posteriormente validada por um especialista.</p></details>
+          <details><summary>Posso contratar para condomínio ou empresa?</summary><p>Sim. A análise considera casas, condomínios, comércios e empresas, respeitando as características técnicas e regulatórias de cada projeto.</p></details>
+          <details><summary>Vou falar com uma pessoa ou apenas com um chatbot?</summary><p>O chatbot apoia dúvidas simples e agiliza o atendimento, mas o cliente pode solicitar atendimento humano a qualquer momento.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container cta-box">
+        <div><h2>Pronto para transformar luz do sol em economia?</h2><p>Faça uma simulação gratuita e avance apenas se a solução fizer sentido para você.</p></div>
+        <a class="btn btn-primary" href="#simulador">Simular agora →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div><a class="logo" href="#inicio" style="color:#fff"><span class="sun-logo" aria-hidden="true">☀</span> Solar+</a><p>Soluções energéticas sustentáveis, econômicas e inteligentes.</p><span class="badge-ods">ODS 7 · Energia limpa e acessível</span></div>
+      <div><h3>Navegação</h3><a href="#beneficios">Benefícios</a><a href="#simulador">Simulador</a><a href="#como-funciona">Como funciona</a><a href="#faq">FAQ</a></div>
+      <div><h3>Relacionamento</h3><a href="#simulador">Solicitar proposta</a><a href="#faq">Central de dúvidas</a><a href="mailto:contato@solarplus.com.br">contato@solarplus.com.br</a></div>
+      <p class="legal">Protótipo acadêmico (Fase 6 – Marketing Digital). Empresa, depoimento e números são fictícios e ilustrativos.</p>
+    </div>
+  </footer>
+
+  <a class="whatsapp" href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Quero%20simular%20minha%20economia%20com%20a%20Solar%2B" target="_blank" rel="noopener" aria-label="Iniciar atendimento pelo WhatsApp"><b aria-hidden="true">💬</b><span>Falar no WhatsApp</span></a>
+  <div class="toast" id="toast" role="status" aria-live="polite">Simulação concluída.</div>
+
+  <script>
+    const body = document.body;
+    const menuBtn = document.querySelector('.menu-btn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.textContent = open ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); menuBtn.textContent='☰';
+    }));
+
+    document.getElementById('increaseText').addEventListener('click', () => body.classList.add('large-text'));
+    document.getElementById('normalText').addEventListener('click', () => body.classList.remove('large-text'));
+    document.getElementById('contrast').addEventListener('click', (e) => {
+      const on = body.classList.toggle('high-contrast'); e.currentTarget.setAttribute('aria-pressed', String(on));
+    });
+
+    const form = document.getElementById('solarForm');
+    const result = document.getElementById('result');
+    const contactStep = document.getElementById('contactStep');
+    const money = v => v.toLocaleString('pt-BR', {style:'currency', currency:'BRL', maximumFractionDigits:0});
+
+    function setStep(n) {
+      document.querySelectorAll('#progress span').forEach((s, i) => s.classList.toggle('active', i < n));
+      document.getElementById('progress').setAttribute('aria-label', 'Etapa ' + n + ' de 2');
+      document.getElementById('stepLabel').textContent = 'Etapa ' + n + ' de 2 · ' + (n === 1 ? 'Simulação' : 'Seus dados de contato');
+    }
+    function showToast(msg) {
+      const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2600);
+    }
+    function check(field, errorId, ok) {
+      document.getElementById(errorId).style.display = ok ? 'none' : 'block';
+      field.setAttribute('aria-invalid', String(!ok));
+      return ok;
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const property = document.getElementById('property');
+      const city = document.getElementById('city');
+      const bill = document.getElementById('bill');
+      const checks = [
+        check(property, 'propertyError', property.value !== ''),
+        check(city, 'cityError', city.value.trim().length >= 2),
+        check(bill, 'billError', Number(bill.value) >= 100)
+      ];
+      if (checks.includes(false)) { form.querySelector('[aria-invalid="true"]').focus(); return; }
+
+      const value = Number(bill.value);
+      const factor = property.value === 'Empresa' || property.value === 'Comércio' ? .78 : .72;
+      const monthly = value * factor;
+      document.getElementById('monthlySaving').textContent = money(monthly);
+      document.getElementById('annualSaving').textContent = money(monthly * 12);
+      document.getElementById('fiveYearSaving').textContent = money(monthly * 60);
+      result.setAttribute('aria-hidden', 'false');
+      result.scrollIntoView({behavior:'smooth', block:'nearest'});
+      showToast('Simulação concluída.');
+    });
+
+    document.getElementById('proposalBtn').addEventListener('click', () => {
+      contactStep.classList.add('show');
+      setStep(2);
+      contactStep.scrollIntoView({behavior:'smooth', block:'nearest'});
+      document.getElementById('name').focus({preventScroll:true});
+    });
+
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      const name = document.getElementById('name');
+      const phone = document.getElementById('phone');
+      const consent = document.getElementById('consent');
+      const checks = [
+        check(name, 'nameError', name.value.trim().length >= 3),
+        check(phone, 'phoneError', phone.value.replace(/\D/g, '').length >= 10),
+        check(consent, 'consentError', consent.checked)
+      ];
+      if (checks.includes(false)) { contactStep.querySelector('[aria-invalid="true"]').focus(); return; }
+      contactStep.classList.remove('show');
+      result.style.display = 'none';
+      document.getElementById('success').classList.add('show');
+      document.querySelectorAll('#progress span').forEach(s => s.classList.add('active'));
+      document.getElementById('stepLabel').textContent = 'Concluído ✓';
+      showToast('Pedido enviado com sucesso.');
+    });
+  </script>
+</body>
+</html>
